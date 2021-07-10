@@ -149,7 +149,8 @@ Keys:  Help   Display mode   Restart statistics   Order of fields   quit
 22. AS15169  8.8.8.8             0.0%    73   17.6  18.6  17.6  48.3   4.3
 ```
 7. За dns.google. отвечают авторизированные DNS-серверы:
-```dns.google.		10800	IN	NS	ns1.zdns.google.
+```
+dns.google.		10800	IN	NS	ns1.zdns.google.
 dns.google.		10800	IN	NS	ns3.zdns.google.
 dns.google.		10800	IN	NS	ns4.zdns.google.
 dns.google.		10800	IN	NS	ns2.zdns.google.
