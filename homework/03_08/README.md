@@ -231,4 +231,5 @@ UNCONN     0          0               127.0.0.53%lo:domain              0.0.0.0:
 UNCONN     0          0                     0.0.0.0:sunrpc              0.0.0.0:*         users:(("rpcbind",pid=615,fd=5),("systemd",pid=1,fd=83))     
 UNCONN     0          0                        [::]:sunrpc                 [::]:*         users:(("rpcbind",pid=615,fd=7),("systemd",pid=1,fd=86))
 ```
-5. 
+5.
+![Home Network.png](Home Network.png)
