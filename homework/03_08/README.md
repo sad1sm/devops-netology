@@ -233,4 +233,4 @@ UNCONN     0          0                        [::]:sunrpc                 [::]:
 ```
 5.
 
-![Home Network.png](Home Network.png)
+![Home_Network.png](Home_Network.png)
