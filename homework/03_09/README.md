@@ -1,10 +1,10 @@
-1.
-![bitwarden.png](bitwarden.png)
-2.
-![googleauth.jpg](googleauth.jpg)
-3.
-![apache2.png](apache2.png)
-4. 
+1.  
+![bitwarden.png](bitwarden.png)  
+2.  
+![googleauth.jpg](googleauth.jpg)  
+3.  
+![apache2.png](apache2.png)  
+4.   
 ``` 
 $ ./testssl.sh -U --sneaky https://bitwarden.com
 
@@ -100,7 +100,7 @@ Testing all IPv4 addresses (port 443): 104.18.13.33 104.18.12.33
 Done testing now all IP addresses (on port 443): 104.18.13.33 104.18.12.33
 
 ```
-5. 
+5.   
 ``` 
 f1tz@f1tz-linux:~$ ssh-copy-id f1tz@127.0.0.1 -p 2234
 The authenticity of host '[127.0.0.1]:2234 ([127.0.0.1]:2234)' can't be established.
@@ -140,7 +140,7 @@ See "man sudo_root" for details.
 
 f1tz@test:~$ 
 ```
-6.
+6.  
 ``` 
 f1tz@f1tz-linux:~$ cat .ssh/config 
 Host test 
@@ -174,7 +174,7 @@ See "man sudo_root" for details.
 
 f1tz@test:~$ 
 ```
-7.
+7.  
 ``` 
 f1tz@f1tz-linux:~$ sudo tcpdump -w 0001.pcap -c 100 -i wlp2s0
 [sudo] пароль для f1tz: 
@@ -182,5 +182,5 @@ tcpdump: listening on wlp2s0, link-type EN10MB (Ethernet), capture size 262144 b
 100 packets captured
 101 packets received by filter
 0 packets dropped by kernel
-```
-![wireshark.jpg](wireshark.jpg)
+```  
+![wireshark.jpg](wireshark.jpg)  
