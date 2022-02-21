@@ -8,11 +8,16 @@
   
 3.  
 - VirtualBox  
-	Версия 6.1.30 r148432 (Qt5.6.2)
+```
+	Версия 6.1.30 r148432 (Qt5.6.2)  
+```
 - Vagrant  
+```
 	$ vagrant --version
 	Vagrant 2.2.19
-- Ansible  
+```
+- Ansible
+```  
 	$ ansible --version
 	ansible 2.9.25
 	  config file = /etc/ansible/ansible.cfg
@@ -20,3 +25,4 @@
 	  ansible python module location = /usr/lib/python2.7/site-packages/ansible
 	  executable location = /usr/bin/ansible
 	  python version = 2.7.5 (default, Nov 16 2020, 22:23:17) [GCC 4.8.5 20150623 (Red Hat 4.8.5-44)]
+```
