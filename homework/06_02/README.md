@@ -92,3 +92,61 @@ Foreign-key constraints:
  postgres | test-simple-user | test_db       | public       | clients    | UPDATE         | NO           | NO
  postgres | test-simple-user | test_db       | public       | clients    | DELETE         | NO           | NO
 ```
+
+3.  
+```
+test_db=# select count(*) from clients;
+ count 
+-------
+     5
+(1 row)
+
+test_db=# select count(*) from orders;
+ count 
+-------
+     5
+(1 row)
+```
+
+4.  
+```
+update clients set заказ=(select id from orders where наименование='Книга') where фамилия='Иванов Иван Иванович';
+update clients set заказ=(select id from orders where наименование='Монитор') where фамилия='Петров Петр Петрович';
+update clients set заказ=(select id from orders where наименование='Гитара') where фамилия='Иоганн Себастьян Бах';
+```
+
+```
+test_db=#  select * from clients where заказ is not null;
+ id |             фамилия             | страна проживания | заказ 
+----+----------------------------------------+-----------------------------------+------------
+  1 | Иванов Иван Иванович | USA                               |          3
+  2 | Петров Петр Петрович | Canada                            |          4
+  3 | Иоганн Себастьян Бах | Japan                             |          5
+(3 rows)
+```
+
+5.  
+```
+test_db=# explain analyze select from clients where заказ is not null;
+                                             QUERY PLAN                                             
+----------------------------------------------------------------------------------------------------
+ Seq Scan on clients  (cost=0.00..18.10 rows=806 width=0) (actual time=0.030..0.035 rows=3 loops=1)
+   Filter: ("заказ" IS NOT NULL)
+   Rows Removed by Filter: 2
+ Planning Time: 0.120 ms
+ Execution Time: 0.069 ms
+(5 rows)
+```
+Последовательное сканирование таблицы clients (ожидаемые значения: стоимость(по времени) от 0 до 18.10 секунд, строк 806, длинна строк 0) (действительные значения от 0.030 до 0.035 секунд, количество строк 3, количество повторов 1). Фильтр ненулевое значение в столбце заказ. Было отфильтровано 2 строки. Планируемое время выполнения запроса 0.120 миллисекунд, реальное 0.069 миллисекунд.  
+
+6.  
+```
+$ pg_dump test_db > /backup/test_db.sql
+$ exit
+$ docker-compose down
+$ vi docker-compose.yml
+$ docker-compose up -d
+$ docker exec -it 06_02-new_db-1 bash
+$ su - postgres
+$ psql < /backup/test_db.sql
+```
