@@ -1,4 +1,8 @@
 1.  
+
+В ответе приведите:
+
+* текст Dockerfile манифеста
 ```
   FROM centos:7
 
@@ -28,7 +32,11 @@
   ENTRYPOINT ["./elasticsearch","-E","discovery.type=single-node"]
 ```
   
+* ссылку на образ в репозитории dockerhub  
+
 https://hub.docker.com/repository/docker/f1tz/netology_test
+
+* ответ elasticsearch на запрос пути / в json виде
   
 ```
 $ curl -k -u elastic:password https://127.0.0.1:9200/
@@ -53,12 +61,14 @@ $ curl -k -u elastic:password https://127.0.0.1:9200/
 ```
   
 2.  
+* Получите список индексов и их статусов, используя API и **приведите в ответе** на задание.
 ```
 $ curl -k -u elastic:password https://0.0.0.0:9200/_cat/indices
 green  open ind-1 Nz1NXsU9Qna06coz4bxirQ 1 0 0 0 225b 225b
 yellow open ind-2 yyK2FNSdSFa1v9PXuy7avQ 2 1 0 0 450b 450b
 yellow open ind-3 B4A_r7GCRt2fmm1krqJM3g 4 2 0 0 900b 900b
 ```
+* Получите состояние кластера `elasticsearch`, используя API.
 ```
 $ curl -k -u elastic:password https://0.0.0.0:9200/_cluster/health?pretty
 {
@@ -80,8 +90,10 @@ $ curl -k -u elastic:password https://0.0.0.0:9200/_cluster/health?pretty
 }
 ```
   
-Статус `yellow` из-за того, что мы находимся не в кластере.  
+* Как вы думаете, почему часть индексов и кластер находится в состоянии yellow?  
+Статус `yellow` из-за того, что мы находимся не в кластере, но у нас есть индексы с репликами, которые не могут быть кому-либо делегированы.  
   
+* Удалите все индексы.
 ```
 $ curl -k -u elastic:password -X DELETE "https://localhost:9200/ind-1?pretty" 
 {
@@ -97,6 +109,7 @@ $ curl -k -u elastic:password -X DELETE "https://localhost:9200/ind-3?pretty"
 }
 ```
 3.  
+* **Приведите в ответе** запрос API и результат вызова API для создания репозитория.
 ```
 $ curl -k -u elastic:password -X PUT "https://localhost:9200/_snapshot/netology_backup?verify=false&pretty" -H 'Content-Type: application/json' -d'
 {              
@@ -110,10 +123,12 @@ $ curl -k -u elastic:password -X PUT "https://localhost:9200/_snapshot/netology_
   "acknowledged" : true
 }
 ```
+* Создайте индекс `test` с 0 реплик и 1 шардом и **приведите в ответе** список индексов.
 ```
 $ curl -k -u elastic:password https://0.0.0.0:9200/_cat/indices
 green open test fvpNoqPhTwOlymxhWXDYZw 1 0 0 0 225b 225b
 ```
+* **Приведите в ответе** список файлов в директории со `snapshot`ами.
 ```
 [elasticsearch@a0284943f11e netology_backup]$ pwd
 /elasticsearch-8.2.0/snapshots/netology_backup
@@ -128,10 +143,12 @@ drwxr-xr-x 5 elasticsearch elasticsearch 4.0K May 15 00:05 indices
 -rw-r--r-- 1 elasticsearch elasticsearch  18K May 15 00:05 meta-eJ5v8fspRJ-4V04Df6VXNg.dat
 -rw-r--r-- 1 elasticsearch elasticsearch  389 May 15 00:05 snap-eJ5v8fspRJ-4V04Df6VXNg.dat
 ```   
+* Удалите индекс `test` и создайте индекс `test-2`. **Приведите в ответе** список индексов.
 ```
 $ curl -k -u elastic:password https://0.0.0.0:9200/_cat/indices
 green open test-2 cc6LrqISRCi1pnuzMbFy4g 1 0 0 0 225b 225b
 ```
+* **Приведите в ответе** запрос к API восстановления и итоговый список индексов.
 ```
 $ curl -k -u elastic:password -X POST "https://localhost:9200/_snapshot/netology_backup/snapshot_1/_restore?pretty" -H 'Content-Type: application/json' -d'
 {
