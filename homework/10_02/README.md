@@ -128,3 +128,58 @@ $ curl http://localhost:9092/kapacitor/v1/ping
 [[inputs.disk]]
 ```
 ![](disk.png)
+
+---
+Вывод curl с verbose:
+```
+$ curl http://localhost:9092/kapacitor/v1/ping -v
+*   Trying 127.0.0.1:9092...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 9092 (#0)
+> GET /kapacitor/v1/ping HTTP/1.1
+> Host: localhost:9092
+> User-Agent: curl/7.68.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 204 No Content
+< Content-Type: application/json; charset=utf-8
+< Request-Id: 029fbe59-58e1-11ed-88f1-0242ac130005
+< X-Kapacitor-Version: 1.6.5
+< Date: Mon, 31 Oct 2022 05:58:15 GMT
+< 
+* Connection #0 to host localhost left intact
+```
+
+```
+$ curl http://localhost:8086/ping -v
+*   Trying 127.0.0.1:8086...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 8086 (#0)
+> GET /ping HTTP/1.1
+> Host: localhost:8086
+> User-Agent: curl/7.68.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 204 No Content
+< Content-Type: application/json
+< Request-Id: 1bbbaf34-58e1-11ed-88a4-0242ac130003
+< X-Influxdb-Build: OSS
+< X-Influxdb-Version: 1.8.10
+< X-Request-Id: 1bbbaf34-58e1-11ed-88a4-0242ac130003
+< Date: Mon, 31 Oct 2022 05:58:57 GMT
+< 
+* Connection #0 to host localhost left intact
+```
+
+Вывод docker ps -a:
+```
+$ docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS        PORTS                                                                    NAMES
+89bf5b224000   chrono_config           "/entrypoint.sh chro…"   15 hours ago   Up 15 hours   0.0.0.0:8888->8888/tcp                                                   sandbox-chronograf-1
+d98714a6e89a   kapacitor               "/entrypoint.sh kapa…"   15 hours ago   Up 15 hours   0.0.0.0:9092->9092/tcp                                                   sandbox-kapacitor-1
+a280a891b325   telegraf                "/entrypoint.sh tele…"   15 hours ago   Up 15 hours   8092/udp, 8125/udp, 8094/tcp                                             sandbox-telegraf-1
+097cfe78ef8b   sandbox_documentation   "/documentation/docu…"   15 hours ago   Up 15 hours   0.0.0.0:3010->3000/tcp                                                   sandbox-documentation-1
+768af03a8ae7   influxdb                "/entrypoint.sh infl…"   15 hours ago   Up 15 hours   0.0.0.0:8082->8082/tcp, 0.0.0.0:8086->8086/tcp, 0.0.0.0:8089->8089/udp   sandbox-influxdb-1
+```
