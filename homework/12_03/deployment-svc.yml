@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-svc
+spec:
+  selector:
+    app: nginx
+  ports:
+    - name: web
+      port: 80
+    - name: multitool
+      port: 1180
