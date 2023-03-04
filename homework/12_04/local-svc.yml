@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-svc-local
+spec:
+  selector:
+    app: nginx
+  ports:
+    - name: web-nginx-local
+      port: 80
+      nodePort: 31001
+    - name: web-multitool-local
+      port: 1180
+      nodePort: 31002
+  type: NodePort
