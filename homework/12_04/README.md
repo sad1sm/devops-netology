@@ -75,7 +75,8 @@ deployment-svc         ClusterIP   10.152.183.93   <none>        9001/TCP,9002/T
 deployment-svc-local   NodePort    10.152.183.91   <none>        80:31001/TCP,1180:31002/TCP   13m
 ```
 >2. Продемонстрировать доступ с помощью браузера или `curl` с локального компьютера.
-```% kubectl get ep       
+```
+% kubectl get ep       
 NAME                   ENDPOINTS                                                           AGE
 kubernetes             192.168.64.2:16443                                                  13d
 deployment-svc         10.1.254.113:1180,10.1.254.114:1180,10.1.254.115:1180 + 5 more...   18m
