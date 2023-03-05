@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-svc-fe-be
+spec:
+  type: NodePort
+  selector:
+    appGeneral: fe-be
+  ports:
+    - name: web-nginx-local
+      port: 80
+      nodePort: 31001
+    - name: web-multitool-local
+      port: 1180
+      nodePort: 31002
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-svc-be
+spec:
+  selector:
+    app: multitool
+  ports:
+    - name: web-multitool
+      port: 80
+      targetPort: 1180
+      protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-svc-fe
+spec:
+  selector:
+    app: nginx
+  ports:
+    - name: web-nginx
+      port: 80
+      targetPort: 80
+      protocol: TCP

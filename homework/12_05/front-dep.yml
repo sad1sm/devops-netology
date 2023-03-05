@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: main-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+        appGeneral: fe-be
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14.2
+          ports:
+          - containerPort: 80
