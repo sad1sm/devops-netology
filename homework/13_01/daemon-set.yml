@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-multitool
+  labels:
+    app: multitool
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: multitool
+  updateStrategy:
+    type: OnDelete
+  template:
+    metadata:
+      labels:
+        app: multitool
+    spec:
+      containers:
+        - name: multitool
+          image: wbitt/network-multitool
+          ports:
+          - containerPort: 1180
+          volumeMounts:
+            - name: ds-share
+              mountPath: "/opt/log"
+      volumes:
+        - name: ds-share
+          hostPath:
+            path: /var/log

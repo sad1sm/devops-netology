@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-mb
+  labels:
+    app: busybox
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox
+  template:
+    metadata:
+      labels:
+        app: busybox
+    spec:
+      containers:
+        - name: busybox
+          image: busybox:latest
+          command: ['sh', '-c', 'while true; do echo Hello, Netology! $(date) >> /opt/log/health_check.log; sleep 5; done;']
+          volumeMounts:
+            - name: share
+              mountPath: "/opt/log"
+        - name: multitool
+          image: wbitt/network-multitool
+          ports:
+          - containerPort: 1180
+          volumeMounts:
+            - name: share
+              mountPath: "/opt/busy_log"
+      volumes:
+        - name: share
+          emptyDir: {}
