@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mb-pv
+spec:
+  capacity:
+    storage: 512Mi
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: host-path
+  hostPath:
+    path: /opt/data/share
+  persistentVolumeReclaimPolicy: Delete
