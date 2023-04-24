@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-mn
+  labels:
+    app: multinginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multinginx
+  template:
+    metadata:
+      labels:
+        app: multinginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: html-nginx
+            mountPath: /usr/share/nginx/html/
+      - name: multitool
+        image: wbitt/network-multitool
+        env:
+          - name: HTTP_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: multinginx-conf
+                key: "HTTP_PORT"
+
+          - name: HTTPS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: multinginx-conf
+                key: "HTTPS_PORT"
+      volumes:
+        - name: html-nginx
+          configMap:
+            name: nginx-page

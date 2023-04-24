@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-page
+data:
+  index.html:  |
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Config Map Test</title>
+    </head>
+    <body>
+      <h1>Hello, Netology!</h1>
+    </body>
+    </html>

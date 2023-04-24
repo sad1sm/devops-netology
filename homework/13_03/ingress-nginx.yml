@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: http-ingress
+spec:
+  tls:
+    - hosts:
+        - ycloud.local
+      secretName: nginx-secret
+  ingressClassName: nginx
+  rules:
+  - http:
+      host: ycloud.local
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-svc
+            port:
+              number: 443
